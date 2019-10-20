@@ -5,8 +5,14 @@ import "./styles.css";
 
 export default class Main extends Component {
   state = {
-    newBox: ""
+    newBox: "",
+    boxes: []
   };
+
+  async componentDidMount() {
+    const { data } = await api.get("/boxes");
+    this.setState({ boxes: data });
+  }
 
   handleSubmit = async event => {
     event.preventDefault();
@@ -19,7 +25,12 @@ export default class Main extends Component {
     this.setState({ newBox: event.target.value });
   };
 
+  handleNavigate = id => {
+    this.props.history.push(`/box/${id}`);
+  };
+
   render() {
+    //console.log(this.state.boxes);
     return (
       <div id="main-container">
         <form onSubmit={this.handleSubmit}>
@@ -31,6 +42,22 @@ export default class Main extends Component {
           />
           <button type="sumit">Criar</button>
         </form>
+
+        <ul>
+          {this.state.boxes.map(box => (
+            <li key={box._id}>
+              <div>
+                {box.title}
+                <button
+                  type="submit"
+                  onClick={() => this.handleNavigate(box._id)}
+                >
+                  Entrar
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }

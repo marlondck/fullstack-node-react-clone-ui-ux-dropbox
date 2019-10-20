@@ -31,9 +31,11 @@ io.on("connection", socket => {
 });
 
 //7
-mongoose.connect("mongodb+srv://user:password@URL/DB?retryWrites=true", {
+mongoose.connect("mongodb://localhost:27017/mongodropbox", {
   useNewUrlParser: true
-});
+}); 
+//mongodb+srv://user:password@URL/DB?retryWrites=true
+//
 //middleware global
 app.use((req, res, next) => {
   req.io = io;

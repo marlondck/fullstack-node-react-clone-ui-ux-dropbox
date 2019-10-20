@@ -11,18 +11,19 @@ export default class Main extends Component {
   };
 
   async componentDidMount() {
-    const box = await AsyncStorage.getItem("@FilesBox:box");
+    const box = await AsyncStorage.getItem("@FilesBox:boxid");
     if (box) {
       this.props.navigation.navigate("Box");
     }
   }
 
   handleSignIn = async () => {
-    const response = await api.post("boxes", {
+    const { data } = await api.post("/boxes", {
       title: this.state.newBox
     });
+    //console.log(data._id);
 
-    await AsyncStorage.setItem("@FilesBox:box", response.data._id);
+    await AsyncStorage.setItem("@FilesBox:boxid", data._id);
 
     this.props.navigation.navigate("Box");
   };

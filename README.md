@@ -1,6 +1,24 @@
-## Apenas para estudo
+## Instalação
 
-App clone Dropbox using NodeJS, ReactJS and React Native
+- Entre nas pastas back, front e mobile e de um npm install ou yarn para a instalação das dependencias.
 
-## Tela
-![alt tag](https://raw.githubusercontent.com/marlonauthority/dropbox-clone-node-react/master/example/1.png)
+- no backend entre: src/server.js e altere a linha do **mongoose.connect**
+  - pode usar o docker para subir um container em mongo:
+
+```
+docker run --name mongodropbox -p 27017:27017 -d -t mongo
+```
+
+### No Backend e Frontend
+
+```
+yarn start
+```
+
+### No Mobile
+
+```
+react-native run-ios
+```
+
+<img src="example/example.gif" />

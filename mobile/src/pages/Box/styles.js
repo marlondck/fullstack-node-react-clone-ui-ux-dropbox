@@ -61,6 +61,17 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     alignItems: "center",
     justifyContent: "center"
+  },
+  exit: {
+    position: "relative",
+    left: 10,
+    bottom: 30 + getBottomSpace(),
+    width: 60,
+    height: 60,
+    backgroundColor: "#7159c1",
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
 
