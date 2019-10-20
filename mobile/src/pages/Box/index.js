@@ -16,9 +16,9 @@ export default class Box extends Component {
   state = { box: {} };
 
   async componentDidMount() {
-    const box = await AsyncStorage.getItem("FilesBox:box");
+    const boxid = await AsyncStorage.getItem("@FilesBox:boxid");
     this.subscribeToNewFiles();
-    const response = await api.get(`boxes/${box}`);
+    const response = await api.get(`boxes/${boxid}`);
 
     this.setState({ box: response.data });
   }
@@ -67,6 +67,10 @@ export default class Box extends Component {
       }
     });
   };
+  handleLogout = async () => {
+    await AsyncStorage.clear();
+    this.props.navigation.navigate("Main");
+  };
 
   renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => this.openFile(item)} style={styles.file}>
@@ -87,6 +91,7 @@ export default class Box extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.boxTitle}>{this.state.box.title}</Text>
+
         <FlatList
           style={styles.list}
           data={this.state.box.files}
@@ -94,6 +99,9 @@ export default class Box extends Component {
           ItemSeparatorComponent={() => <View style={styles.separator} />}
           renderItem={this.renderItem}
         />
+        <TouchableOpacity style={styles.exit} onPress={this.handleLogout}>
+          <Icon name="exit-to-app" size={20} color="#fff" />
+        </TouchableOpacity>
         <TouchableOpacity style={styles.fab} onPress={this.handleUpload}>
           <Icon name="cloud-upload" size={24} color="#fff" />
         </TouchableOpacity>

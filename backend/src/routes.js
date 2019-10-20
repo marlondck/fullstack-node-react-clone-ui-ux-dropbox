@@ -25,6 +25,7 @@ routes.get("/", (req, res) => {
 
 routes.post("/boxes", BoxController.store);
 routes.get("/boxes/:id", BoxController.show);
+routes.get("/boxes/", BoxController.index);
 routes.post(
   "/boxes/:id/files",
   multer(multerConfig).single("file"),
